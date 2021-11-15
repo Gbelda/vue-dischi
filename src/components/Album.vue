@@ -1,18 +1,23 @@
 <template>
-  <div class="row pt-5 justify-content-center main_content">
-    <div
-      class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-5"
-      v-for="album in albums"
-      :key="album.title"
-    >
-      <div class="album text-center m-auto">
-        <img :src="album.poster" alt="" />
-        <h3 class="title">{{ album.title.toUpperCase() }}</h3>
-        <h5 class="meta_data">
-          {{ album.author }}
-          <span class="year">{{ album.year }}</span>
-        </h5>
+  <div>
+    <div class="row pt-5 justify-content-center main_content" v-if="!loading">
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-5"
+        v-for="album in albums"
+        :key="album.title"
+      >
+        <div class="album text-center m-auto">
+          <img :src="album.poster" alt="" />
+          <h3 class="title">{{ album.title.toUpperCase() }}</h3>
+          <h5 class="meta_data">
+            {{ album.author }}
+            <span class="year">{{ album.year }}</span>
+          </h5>
+        </div>
       </div>
+    </div>
+    <div class="loading" v-else>
+      <h1>LOADING....</h1>
     </div>
   </div>
 </template>
@@ -24,6 +29,7 @@ export default {
     return {
       albums: [],
       error: "",
+      loading: true,
     };
   },
   mounted() {
@@ -31,6 +37,7 @@ export default {
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((response) => {
         this.albums = response.data.response;
+        this.loading = false;
       })
       .catch((error) => {
         alert(error);
@@ -64,5 +71,9 @@ export default {
       }
     }
   }
+}
+.loading {
+  color: white;
+  text-align: center;
 }
 </style>
