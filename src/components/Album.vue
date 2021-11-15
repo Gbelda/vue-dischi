@@ -32,16 +32,23 @@ export default {
       loading: true,
     };
   },
+  methods: {
+    callAPI() {
+      axios
+        .get("https://flynn.boolean.careers/exercises/api/array/music")
+        .then((response) => {
+          this.albums = response.data.response;
+          this.loading = false;
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+  },
   mounted() {
-    axios
-      .get("https://flynn.boolean.careers/exercises/api/array/music")
-      .then((response) => {
-        this.albums = response.data.response;
-        this.loading = false;
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    setInterval(() => {
+      this.callAPI();
+    }, 3000);
   },
 };
 </script>
@@ -73,6 +80,7 @@ export default {
   }
 }
 .loading {
+  padding-top: 5rem;
   color: white;
   text-align: center;
 }
