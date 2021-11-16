@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SelectGenre @filter-genre="filterGenre" />
     <div class="row pt-5 justify-content-center main_content" v-if="!loading">
       <div
         class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-5"
@@ -24,7 +25,11 @@
 
 <script>
 import axios from "axios";
+import SelectGenre from "./SelectGenre.vue";
 export default {
+  components: {
+    SelectGenre,
+  },
   data() {
     return {
       albums: [],
@@ -33,6 +38,9 @@ export default {
     };
   },
   methods: {
+    filterGenre() {
+      console.log();
+    },
     callAPI() {
       axios
         .get("https://flynn.boolean.careers/exercises/api/array/music")
