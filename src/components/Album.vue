@@ -1,10 +1,10 @@
 <template>
   <div>
-    <SelectGenre @filter-genre="filterGenre" />
+    <SelectGenre @filter-genre="getGenre" />
     <div class="row pt-5 justify-content-center main_content" v-if="!loading">
       <div
         class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-5"
-        v-for="album in albums"
+        v-for="album in filterAlbum"
         :key="album.title"
       >
         <div class="album text-center m-auto">
@@ -35,12 +35,10 @@ export default {
       albums: [],
       error: "",
       loading: true,
+      genre: "",
     };
   },
   methods: {
-    filterGenre() {
-      console.log();
-    },
     callAPI() {
       axios
         .get("https://flynn.boolean.careers/exercises/api/array/music")
@@ -52,11 +50,19 @@ export default {
           alert(error);
         });
     },
+    getGenre(text) {
+      this.genre = text;
+    },
+  },
+  computed: {
+    filterAlbum() {
+      return this.albums.filter((album) => {
+        return album.genre.indexOf(this.genre) > -1;
+      });
+    },
   },
   mounted() {
-    setInterval(() => {
-      this.callAPI();
-    }, 3000);
+    this.callAPI();
   },
 };
 </script>

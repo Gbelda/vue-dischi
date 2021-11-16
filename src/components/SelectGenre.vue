@@ -8,10 +8,10 @@
       @change="$emit('filter-genre', genreType)"
     >
       <option selected value="">All</option>
-      <option value="1">Rock</option>
-      <option value="2">Pop</option>
-      <option value="3">Jazz</option>
-      <option value="4">Metal</option>
+      <option value="Rock">Rock</option>
+      <option value="Pop">Pop</option>
+      <option value="Jazz">Jazz</option>
+      <option value="Metal">Metal</option>
     </select>
   </div>
 </template>
