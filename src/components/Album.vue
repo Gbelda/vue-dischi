@@ -1,10 +1,11 @@
 <template>
   <div>
     <SelectGenre @filter-genre="getGenre" />
+    <SelectArtist :artists="filterAlbum" @filter-artist="getArtist" />
     <div class="row pt-5 justify-content-center main_content" v-if="!loading">
       <div
         class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-5"
-        v-for="album in filterAlbum"
+        v-for="album in filterArtist"
         :key="album.title"
       >
         <div class="album text-center m-auto">
@@ -26,9 +27,11 @@
 <script>
 import axios from "axios";
 import SelectGenre from "./SelectGenre.vue";
+import SelectArtist from "./SelectArtist.vue";
 export default {
   components: {
     SelectGenre,
+    SelectArtist,
   },
   data() {
     return {
@@ -36,6 +39,8 @@ export default {
       error: "",
       loading: true,
       genre: "",
+      artist: "",
+      filteredAlbum: [],
     };
   },
   methods: {
@@ -53,6 +58,9 @@ export default {
     getGenre(text) {
       this.genre = text;
     },
+    getArtist(text) {
+      this.artist = text;
+    },
   },
   computed: {
     filterAlbum() {
@@ -60,9 +68,16 @@ export default {
         return album.genre.indexOf(this.genre) > -1;
       });
     },
+    filterArtist() {
+      return this.filterAlbum.filter((artist) => {
+        return artist.author.indexOf(this.artist) > -1;
+      });
+    },
   },
   mounted() {
-    this.callAPI();
+    setTimeout(() => {
+      this.callAPI();
+    }, 1000);
   },
 };
 </script>
