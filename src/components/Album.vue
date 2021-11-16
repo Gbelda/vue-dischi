@@ -40,7 +40,6 @@ export default {
       loading: true,
       genre: "",
       artist: "",
-      filteredAlbum: [],
     };
   },
   methods: {
