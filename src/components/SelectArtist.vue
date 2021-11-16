@@ -1,5 +1,6 @@
 <template>
-  <div class="pt-5">
+  <div class="pt-4">
+    <label for="artist">Choose an Artist:</label>
     <select
       class="form-select"
       name="artist"

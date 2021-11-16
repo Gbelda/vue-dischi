@@ -1,5 +1,6 @@
 <template>
   <div class="pt-5">
+    <label for="genre">Choose a Genre:</label>
     <select
       class="form-select"
       name="genre"
