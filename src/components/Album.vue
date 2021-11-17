@@ -73,8 +73,8 @@ export default {
       });
     },
     filterArtist() {
-      return this.filterAlbum.filter((artist) => {
-        return artist.author.indexOf(this.artist) > -1;
+      return this.filterAlbum.filter((album) => {
+        return album.author.indexOf(this.artist) > -1;
       });
     },
   },
