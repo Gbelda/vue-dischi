@@ -21,6 +21,11 @@
     <div class="loading" v-else>
       <h1>LOADING....</h1>
     </div>
+    <div>
+      <h2 v-if="filterArtist == 0 && loading == false">
+        There is no Album available...
+      </h2>
+    </div>
   </div>
 </template>
 
@@ -110,6 +115,10 @@ export default {
 .loading {
   padding-top: 5rem;
   color: white;
+  text-align: center;
+}
+h2 {
+  color: red;
   text-align: center;
 }
 </style>
